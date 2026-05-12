@@ -1,1 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>iif LOGIN TEST</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
+    .box {
+      background: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background: #4caf50;
+      color: white;
+      font-weight: bold;
+    }
+
+    .status {
+      margin-bottom: 15px;
+      font-size: 14px;
+      color: #00ff99;
+    }
+
+    .small {
+      font-size: 12px;
+      opacity: 0.7;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>iif LOGIN TEST</h2>
+
+  <div class="status">
+    ✔ Page Loaded Successfully
+  </div>
+
+  <div id="domain"></div>
+
+  <input id="user" placeholder="username">
+  <input id="pass" type="password" placeholder="password">
+
+  <button onclick="login()">Login</button>
+
+  <div class="small">
+    If you see this page → routing works
+  </div>
+</div>
+
+<script>
+  // show domain (debug confirmation)
+  document.getElementById("domain").innerText =
+    "Loaded from: " + window.location.hostname;
+
+  function login() {
+    const user = document.getElementById("user").value;
+
+    if (!user) {
+      alert("Enter username");
+      return;
+    }
+
+    localStorage.setItem("auth", "true");
+    localStorage.setItem("user", user);
+
+    alert("Login successful → redirecting to app");
+
+    // later you'll replace this with feed page
+    window.location.href = "app.html";
+  }
+
+  // auto-skip login if already logged in
+  if (localStorage.getItem("auth") === "true") {
+    alert("Already logged in → going to app");
+    window.location.href = "app.html";
+  }
+</script>
+
+</body>
+</html>
